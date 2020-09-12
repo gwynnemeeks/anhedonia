@@ -1,0 +1,23 @@
+{
+    "activity01": {
+          "name": "Fun Television",
+          "description": "Escaping through tv is more fun than escaping through tumblr",
+          "timesPerWeekGoal": "3",
+          "isArchived": false,
+          "userId": ""
+        },
+    "activity02": {
+            "name": "Pokemon Go",
+            "description": "Gotta Catch Them All Whilst Producing Endorphins",
+            "timesPerWeekGoal": "3",
+            "isArchived": false,
+            "userId": ""
+          },
+    "activity03": {
+            "name": "TTRPG",
+            "description": "Getting together with friends to play games or just hang out whilst pretending to be fictional people",
+            "timesPerWeekGoal": "1",
+            "isArchived": "false",
+            "userId": ""
+          }
+    }

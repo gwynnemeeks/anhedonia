@@ -1,0 +1,29 @@
+{
+    "journalEntry01": {
+         "activityId": "activity01",
+         "activityName": "Fun Television",
+         "date": "09.10.2020",
+         "mood": "fun",
+         "moodColor": "DeepPink",
+         "moodIcon": "fas fa-sun fa-lg",
+         "entryText": "Laughing is a surprising emotional release for me. I like the silly oops stones and porcelin unicorns found in Critical Role. I just unironically love it."
+         },
+    "journalEntry02": {
+        "activityId": "activity02",
+        "activityName": "Pokemon Go",
+        "date": "09.11.2020",
+        "mood": "meh",
+        "moodColor": "LightPink",
+        "moodIcon": "fas fa-smog fa-lg",
+        "entryText": "Running out of eggs is the worst. There are no poke stops in my neighborhood. I like the effects of walking but sometimes feel there is no point if I am not hatching eggs."
+        },
+    "journalEntry03": {
+        "activityId": "activity03",
+        "activityName": "TTRPG",
+        "date": "09.13.2020",
+        "mood": "excited",
+        "moodColor": "HotPink",
+        "moodIcon": "fas fa-snowflake fa-lg",
+        "entryText": "Saffron Rose might be too elegant for the snowpocolypse she found herself in. Skinny Jeans is ridiculous and DO NOT get her started on Snowy. But so many laughs with friends."
+        }
+    }
