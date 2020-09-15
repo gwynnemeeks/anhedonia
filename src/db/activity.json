@@ -2,21 +2,21 @@
     "activity01": {
           "name": "Fun Television",
           "description": "Escaping through tv is more fun than escaping through tumblr",
-          "timesPerWeekGoal": "3",
+          "timesPerWeekGoal": 3,
           "isArchived": false,
           "userId": "JJ0WRaOaudQRY87SDWrTa0qjjEl2"
         },
     "activity02": {
             "name": "Pokemon Go",
             "description": "Gotta Catch Them All Whilst Producing Endorphins",
-            "timesPerWeekGoal": "3",
+            "timesPerWeekGoal": 3,
             "isArchived": false,
             "userId": "JJ0WRaOaudQRY87SDWrTa0qjjEl2"
           },
     "activity03": {
             "name": "TTRPG",
             "description": "Getting together with friends to play games or just hang out whilst pretending to be fictional people",
-            "timesPerWeekGoal": "1",
+            "timesPerWeekGoal": 1,
             "isArchived": "false",
             "userId": "JJ0WRaOaudQRY87SDWrTa0qjjEl2"
           }
