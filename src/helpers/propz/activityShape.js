@@ -5,7 +5,7 @@ const activityShape = PropTypes.shape({
   description: PropTypes.string.isRequired,
   timesPerWeekGoal: PropTypes.number.isRequired,
   isArchived: PropTypes.bool.isRequired,
-  uid: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 });
 
 export default { activityShape };
