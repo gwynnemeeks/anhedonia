@@ -2,7 +2,7 @@ import React from 'react';
 
 import activityShape from '../../../helpers/propz/activityShape';
 
-class ActivityCards extends React.Component {
+class ActivityCard extends React.Component {
     static propTypes = {
       activity: activityShape.activityShape,
     }
@@ -14,7 +14,7 @@ class ActivityCards extends React.Component {
             <div className="card text-center">
         <div className="card-header"><h5>{activity.name}</h5></div>
         <div className="card-body">
-          <p className="card-title">{activity.timesPerWeekGoal}</p>
+          <p className="card-title">Times Per Week Goal: {activity.timesPerWeekGoal}</p>
           <p className="card-text">{activity.description}</p>
           <button className="btn btn-secondary">View activity</button>
           </div>
@@ -23,4 +23,4 @@ class ActivityCards extends React.Component {
     }
 }
 
-export default ActivityCards;
+export default ActivityCard;

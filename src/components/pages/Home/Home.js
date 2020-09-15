@@ -2,7 +2,7 @@ import React from 'react';
 
 import authData from '../../../helpers/data/authData';
 import activityData from '../../../helpers/data/activityData';
-import ActivityCards from '../Activity/Activity';
+import ActivityCard from '../Activity/Activity';
 
 class Home extends React.Component {
   state = {
@@ -18,7 +18,7 @@ class Home extends React.Component {
   render() {
     const { activities } = this.state;
 
-    const activityCards = activities.map((activity) => <ActivityCards key={activity.id} activity={activity} />);
+    const activityCards = activities.map((activity) => <ActivityCard key={activity.id} activity={activity} />);
 
     return (
             <div className="Home">
