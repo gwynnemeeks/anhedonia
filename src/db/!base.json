@@ -1,5 +1,5 @@
 {
-    "activities": "fun to do",
-    "journalEntries": "gotta track those feels",
+    "activity": "fun to do",
+    "journalEntry": "gotta track those feels",
     "user": "username"
     }
