@@ -1,23 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import authData from '../../../helpers/data/authData';
+import activityData from '../../../helpers/data/activityData';
+import ActivityCard from '../Activity/Activity';
 
 class Home extends React.Component {
-editActivityEvent = (e) => {
-  e.preventDefault();
-  const activityId = 'coolActivity01';
-  this.props.history.push(`/edit/${activityId}`);
-}
+  state = {
+    activities: [],
+  }
 
-render() {
-  return (
+  componentDidMount() {
+    activityData.getActivitiesByUid(authData.getUid())
+      .then((activities) => this.setState({ activities }))
+      .catch((err) => console.error('get activities borked', err));
+  }
+
+  render() {
+    const { activities } = this.state;
+
+    const activityCards = activities.map((activity) => <ActivityCard key={activity.id} activity={activity} />);
+
+    return (
             <div className="Home">
                 <h1>Home</h1>
-                <button className="btn btn-dark" onClick={this.editActivityEvent}>Edit Activity</button>
-                <Link to='/newActivity'>New Activity</Link>
-                <h2>Here is a link to a <Link to='/activity/activity01'>Specific Activity</Link> </h2>
-            </div>
-  );
-}
+                {activityCards}
+                </div>
+    );
+  }
 }
 
 export default Home;

@@ -5,6 +5,7 @@ class SingleActivity extends React.Component {
     return (
       <div className="SingleActivity">
         <h1>SingleActivity</h1>
+        {/* will need to somehow import activityContainer */}
       </div>
     );
   }
