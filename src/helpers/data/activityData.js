@@ -22,6 +22,5 @@ const getActivitiesByUid = (uid) => new Promise((resolve, reject) => {
     })
     .catch((err) => reject(err));
 });
-console.warn(getActivitiesByUid);
 
 export default { getActivitiesByUid };

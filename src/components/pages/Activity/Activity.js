@@ -4,18 +4,18 @@ import activityShape from '../../../helpers/propz/activityShape';
 
 class ActivityCards extends React.Component {
     static propTypes = {
-      activities: activityShape.activityShape,
+      activity: activityShape.activityShape,
     }
 
     render() {
-      const { activities } = this.props;
+      const { activity } = this.props;
 
       return (
             <div className="card text-center">
-        <div className="card-header"><h5>{activities.name}</h5></div>
+        <div className="card-header"><h5>{activity.name}</h5></div>
         <div className="card-body">
-          <p className="card-title">{activities.timesPerWeekGoal}</p>
-          <p className="card-text">{activities.description}</p>
+          <p className="card-title">{activity.timesPerWeekGoal}</p>
+          <p className="card-text">{activity.description}</p>
           <button className="btn btn-secondary">View activity</button>
           </div>
           </div>
