@@ -11,12 +11,13 @@ class JournalEntry extends React.Component {
       const { journalEntry } = this.props;
 
       return (
-        <div className="card text-center">
-        <h5 className="card-title">{journalEntry.activityName}</h5>
-        <p className="card-text">{journalEntry.entryText}</p>
-        <p className="card-text">Mood: {journalEntry.mood} Icon: {journalEntry.moodIcon}</p>
-        <p className="card-text"><small className="text-muted">{journalEntry.date}</small></p>
-      </div>
+        <div class="card mb-3">
+        <div class="card-body">
+        <h5 class="card-title">{journalEntry.activityName}</h5>
+        <p class="card-text">{journalEntry.entryText}</p>
+        <p class="card-text"><small class="text-muted">{journalEntry.date}</small></p>
+        </div>
+        </div>
       );
     }
 }

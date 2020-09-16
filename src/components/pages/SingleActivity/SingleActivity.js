@@ -26,7 +26,7 @@ class SingleActivity extends React.Component {
 
     journalData.getJournalEntryByActivityId(activityId)
       .then((journalEntry) => this.setState({ journalEntry }))
-      .catch((err) => console.error('get journal entries broke', err));
+      .catch((err) => console.error('get entries noped', err));
   }
 
   render() {
