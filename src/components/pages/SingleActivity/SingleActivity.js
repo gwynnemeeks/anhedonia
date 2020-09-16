@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import JournalEntry from '../JournalEntry/JournalEntry';
+
 import activityData from '../../../helpers/data/activityData';
+import journalData from '../../../helpers/data/journalData';
 
 class SingleActivity extends React.Component {
   static propTypes = {
@@ -11,23 +14,34 @@ class SingleActivity extends React.Component {
 
   state = {
     activity: {},
+    journalEntry: [],
   }
 
   componentDidMount() {
     const { activityId } = this.props;
+
     activityData.getSingleActivity(activityId)
       .then((response) => this.setState({ activity: response.data }))
       .catch((err) => console.error('get single activity borked', err));
+
+    journalData.getJournalEntryByActivityId(activityId)
+      .then((journalEntry) => this.setState({ journalEntry }))
+      .catch((err) => console.error('get journal entries broke', err));
   }
 
   render() {
-    const { activity } = this.state;
+    const { activity, journalEntry } = this.state;
     const { setSingleActivity } = this.props;
+
+    const journalCards = journalEntry.map((entry) => <JournalEntry key={entry.id} entry={entry} />);
 
     return (
       <div>
         <h1>{activity.name}</h1>
         <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
+        <div className="card-columns">
+          {journalCards}
+        </div>
       </div>
     );
   }
