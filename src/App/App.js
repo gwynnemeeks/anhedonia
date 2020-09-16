@@ -9,7 +9,7 @@ import 'firebase/auth';
 import MyNavbar from '../components/pages/MyNavBar/MyNavBar';
 // import NewActivity from '../components/pages/NewActivity/NewActivity';
 // import NewJournalEntry from '../components/pages/NewJournalEntry/NewJournalEntry';
-// import SingleActivity from '../components/pages/SingleActivity/SingleActivity';
+import SingleActivity from '../components/pages/SingleActivity/SingleActivity';
 import ActivityContainer from '../components/pages/Activity/ActivityContainer';
 
 import fbConnection from '../helpers/data/connection';
@@ -21,6 +21,7 @@ fbConnection();
 class App extends React.Component {
   state = {
     authed: false,
+    singleActivityId: '',
   }
 
   componentDidMount() {
@@ -37,12 +38,20 @@ class App extends React.Component {
     this.removeListener();
   }
 
+  setSingleActivity = (singleActivityId) => {
+    this.setState({ singleActivityId });
+  }
+
   render() {
-    const { authed } = this.state;
+    const { authed, singleActivityId } = this.state;
 
     const loadComponent = () => {
-      if (authed) {
-        return <ActivityContainer />;
+      if (authed && singleActivityId.length === 0) {
+        return <ActivityContainer setSingleActivity={this.setSingleActivity} />;
+      }
+
+      if (authed && singleActivityId.length > 0) {
+        return <SingleActivity activityId={singleActivityId} setSingleActivity={this.setSingleActivity} />;
       }
       return '';
     };
