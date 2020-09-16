@@ -1,25 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RRNavLink } from 'react-router-dom';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-} from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+
+import Auth from '../Auth/Auth';
+
+import './MyNavBar.scss';
 
 class MyNavbar extends React.Component {
   static propTypes = {
     authed: PropTypes.bool.isRequired,
-  }
-
-  state = {
-    isOpen: false,
   }
 
   logMeOut = (e) => {
@@ -27,45 +17,22 @@ class MyNavbar extends React.Component {
     firebase.auth().signOut();
   }
 
-  toggle = () => {
-    const { isOpen } = this.state;
-    this.setState({ isOpen: !isOpen });
-  }
-
   render() {
-    const { isOpen } = this.state;
+    const { authed } = this.props;
 
-    const buildNavbar = () => {
-      const { authed } = this.props;
-
-      if (authed) {
-        return (
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/home">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/newactivity">New Activity</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink onClick={this.logMeOut}><i className="fas fa-sign-out-alt fa-flip-horizontal fa-lg"></i></NavLink>
-              </NavItem>
-            </Nav>
-        );
-      }
-
-      return <Nav className="ml-auto" navbar></Nav>;
-    };
     return (
-      <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Anhedonia</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          {buildNavbar()}
-        </Collapse>
-      </Navbar>
-      </div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a className="navbar-brand" href="/">Anhedonia</a>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            {
+              authed
+                ? <button className="nav-link btn btn-danger text-dark logout-button" onClick={this.logOutClickEvent}><i className="fas fa-sign-out-alt"></i> Logout</button>
+                : <Auth />
+            }
+          </li>
+        </ul>
+      </nav>
     );
   }
 }
