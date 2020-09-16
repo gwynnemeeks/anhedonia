@@ -1,10 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import activityShape from '../../../helpers/propz/activityShape';
 
 class ActivityCard extends React.Component {
     static propTypes = {
       activity: activityShape.activityShape,
+      setSingleActivity: PropTypes.func.isRequired,
+    }
+
+    singleActivityEvent = (e) => {
+      e.preventDefault();
+      const { activity, setSingleActivity } = this.props;
+      setSingleActivity(activity.id);
     }
 
     render() {
@@ -16,7 +24,7 @@ class ActivityCard extends React.Component {
         <div className="card-body">
           <p className="card-title">Times Per Week Goal: {activity.timesPerWeekGoal}</p>
           <p className="card-text">{activity.description}</p>
-          <button className="btn btn-secondary">View activity</button>
+          <button className="btn btn-secondary" onClick={this.singleActivityEvent}><i className="fas fa-binoculars fa-lg"></i></button>
           </div>
           </div>
       );

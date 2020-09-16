@@ -23,4 +23,6 @@ const getActivitiesByUid = (uid) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
-export default { getActivitiesByUid };
+const getSingleActivity = (activityId) => axios.get(`${baseUrl}/activity/${activityId}.json`);
+
+export default { getActivitiesByUid, getSingleActivity };
