@@ -14,7 +14,7 @@ class SingleActivity extends React.Component {
 
   state = {
     activity: {},
-    journalEntry: [],
+    journalEntries: [],
   }
 
   componentDidMount() {
@@ -25,15 +25,15 @@ class SingleActivity extends React.Component {
       .catch((err) => console.error('get single activity borked', err));
 
     journalData.getJournalEntryByActivityId(activityId)
-      .then((journalEntry) => this.setState({ journalEntry }))
+      .then((journalEntries) => this.setState({ journalEntries }))
       .catch((err) => console.error('get entries noped', err));
   }
 
   render() {
-    const { activity, journalEntry } = this.state;
+    const { activity, journalEntries } = this.state;
     const { setSingleActivity } = this.props;
 
-    const journalCards = journalEntry.map((entry) => <JournalEntry key={entry.id} entry={entry} />);
+    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} />);
 
     return (
       <div>

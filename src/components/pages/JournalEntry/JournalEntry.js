@@ -4,7 +4,7 @@ import journalEntryShape from '../../../helpers/propz/journalEntryShape';
 
 class JournalEntry extends React.Component {
     static propTypes = {
-      journalEntry: journalEntryShape.journalEntryShape,
+      entry: journalEntryShape.journalEntryShape,
     }
 
     render() {
