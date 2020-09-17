@@ -6,13 +6,13 @@ import journalEntryShape from '../../../helpers/propz/journalEntryShape';
 class JournalEntry extends React.Component {
     static propTypes = {
       entry: journalEntryShape.journalEntryShape,
-      deleteEntry: PropTypes.func.isRequired,
+      deleteJournalEntry: PropTypes.func.isRequired,
     }
 
-    deleteEntryEvent = (e) => {
+    deleteJournalEntryEvent = (e) => {
       e.preventDefault();
-      const { entry, deleteEntry } = this.props;
-      deleteEntry(entry.id);
+      const { journalEntry, deleteJournalEntry } = this.props;
+      deleteJournalEntry(journalEntry.id);
     }
 
     render() {
@@ -24,7 +24,7 @@ class JournalEntry extends React.Component {
         <h5 className="card-title">{journalEntry.activityName}</h5>
         <p className="card-text">{journalEntry.entryText}</p>
         <p className="card-text"><small className="text-muted">{journalEntry.date}</small></p>
-        <button className="btn btn-danger" onClick={this.deleteEntryEvent}><i className="far fa-trash-alt fa-lg"></i></button>
+        <button className="btn btn-danger" onClick={this.deleteJournalEntryEvent}><i className="far fa-trash-alt fa-lg"></i></button>
         </div>
         </div>
       );

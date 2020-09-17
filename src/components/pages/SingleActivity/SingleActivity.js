@@ -34,7 +34,7 @@ class SingleActivity extends React.Component {
     this.getJournalEntries();
   }
 
-  deleteEntry = (journalEntryId) => {
+  deleteJournalEntry = (journalEntryId) => {
     journalData.deleteJournalEntry(journalEntryId)
       .then(() => {
         this.getJournalEntries();
@@ -46,7 +46,7 @@ class SingleActivity extends React.Component {
     const { activity, journalEntries } = this.state;
     const { setSingleActivity } = this.props;
 
-    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} deleteEntry={this.deleteEntry} />);
+    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} deleteJournalEntry={this.deleteJournalEntry} />);
 
     return (
       <div>
