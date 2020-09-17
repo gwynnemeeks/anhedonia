@@ -25,4 +25,6 @@ const getActivitiesByUid = (uid) => new Promise((resolve, reject) => {
 
 const getSingleActivity = (activityId) => axios.get(`${baseUrl}/activity/${activityId}.json`);
 
-export default { getActivitiesByUid, getSingleActivity };
+const deleteActivity = (activityId) => axios.delete(`${baseUrl}/activity/${activityId}.json`);
+
+export default { getActivitiesByUid, getSingleActivity, deleteActivity };
