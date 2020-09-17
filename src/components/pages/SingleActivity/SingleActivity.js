@@ -17,6 +17,13 @@ class SingleActivity extends React.Component {
     journalEntries: [],
   }
 
+  getJournalEntries = () => {
+    const { activityId } = this.props;
+    journalData.getJournalEntryByActivityId(activityId)
+      .then((journalEntries) => this.setState({ journalEntries }))
+      .catch((err) => console.error('get entries noped', err));
+  }
+
   componentDidMount() {
     const { activityId } = this.props;
 
@@ -24,16 +31,22 @@ class SingleActivity extends React.Component {
       .then((response) => this.setState({ activity: response.data }))
       .catch((err) => console.error('get single activity borked', err));
 
-    journalData.getJournalEntryByActivityId(activityId)
-      .then((journalEntries) => this.setState({ journalEntries }))
-      .catch((err) => console.error('get entries noped', err));
+    this.getJournalEntries();
+  }
+
+  deleteJournalEntry = (journalEntryId) => {
+    journalData.deleteJournalEntry(journalEntryId)
+      .then(() => {
+        this.getJournalEntries();
+      })
+      .catch((err) => console.error('delete j entries failed', err));
   }
 
   render() {
     const { activity, journalEntries } = this.state;
     const { setSingleActivity } = this.props;
 
-    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} />);
+    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} deleteJournalEntry={this.deleteJournalEntry} />);
 
     return (
       <div>
