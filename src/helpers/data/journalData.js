@@ -10,4 +10,6 @@ const getJournalEntryByActivityId = (activityId) => new Promise((resolve, reject
     .catch((err) => reject(err));
 });
 
-export default { getJournalEntryByActivityId };
+const deleteJournalEntry = (journalEntryId) => axios.delete(`${baseUrl}/journalEntry/${journalEntryId}.json`);
+
+export default { getJournalEntryByActivityId, deleteJournalEntry };
