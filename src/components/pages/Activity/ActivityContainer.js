@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Activity from './Activity';
+import NewActivity from '../NewActivity/NewActivity';
 
 import authData from '../../../helpers/data/authData';
 import activityData from '../../../helpers/data/activityData';
@@ -14,6 +15,7 @@ class ActivityContainer extends React.Component {
 
     state = {
       activities: [],
+      formOpen: false,
     }
 
     getActivity = () => {
@@ -34,14 +36,28 @@ class ActivityContainer extends React.Component {
         .catch((err) => console.error('delete activity is being mean', err));
     }
 
+    createActivity = (newActivity) => {
+      activityData.createActivity(newActivity)
+        .then(() => {
+          this.getActivity();
+          this.setState({ formOpen: false });
+        })
+        .catch((err) => console.error('create activity went awry', err));
+    }
+
     render() {
-      const { activities } = this.state;
+      const { activities, formOpen } = this.state;
       const { setSingleActivity } = this.props;
 
       const activityCard = activities.map((activity) => <Activity key={activity.id} activity={activity} setSingleActivity={setSingleActivity} deleteActivity={this.deleteActivity} />);
+
       return (
+  <div>
+        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square fa-lg">New Activity</i></button>
+      { formOpen ? <NewActivity createActivity={this.createActivity}/> : '' }
             <div className="card-columns">
                 {activityCard}
+            </div>
             </div>
       );
     }
