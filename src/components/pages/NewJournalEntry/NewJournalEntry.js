@@ -121,7 +121,7 @@ class NewJournalEntry extends React.Component {
       type="text"
       className="form-control"
       id="moodColor"
-      placeholder="Team Name"
+      placeholder="Mood Color"
       onChange={this.changeMoodColorEvent}
     />
     <div className="form-group">

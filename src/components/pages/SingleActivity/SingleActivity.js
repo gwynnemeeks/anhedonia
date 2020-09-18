@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import JournalEntry from '../JournalEntry/JournalEntry';
+import NewJournalEntry from '../NewJournalEntry/NewJournalEntry';
 
 import activityData from '../../../helpers/data/activityData';
 import journalData from '../../../helpers/data/journalData';
@@ -15,6 +16,7 @@ class SingleActivity extends React.Component {
   state = {
     activity: {},
     journalEntries: [],
+    showForm: false,
   }
 
   getJournalEntries = () => {
@@ -42,14 +44,26 @@ class SingleActivity extends React.Component {
       .catch((err) => console.error('delete j entries failed', err));
   }
 
+  createJournalEntry = (newJournalEntry) => {
+    journalData.createJournalEntry(newJournalEntry)
+      .then(() => {
+        this.getJournalEntries();
+        this.setState({ showForm: false });
+      })
+      .catch((err) => console.error(err));
+  }
+
   render() {
-    const { activity, journalEntries } = this.state;
-    const { setSingleActivity } = this.props;
+    const { activity, journalEntries, showForm } = this.state;
+    const { setSingleActivity, activityId } = this.props;
 
     const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} deleteJournalEntry={this.deleteJournalEntry} />);
 
     return (
       <div>
+        <button className="btn btn-warning" onClick={() => { this.setState({ showForm: !showForm }); }}>
+                <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i></button>
+          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} /> : ''}
         <h1>{activity.name}</h1>
         <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
         <div className="card-columns">
