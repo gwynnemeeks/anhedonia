@@ -1,7 +1,6 @@
 import React from 'react';
 
 import authData from '../../../helpers/data/authData';
-import activityData from '../../../helpers/data/activityData';
 
 class NewActivity extends React.Component {
   state = {
@@ -34,24 +33,24 @@ class NewActivity extends React.Component {
 
   saveActvitiy = (e) => {
     e.preventDefault();
-    const keysIWant = [
-      'name',
-      'description',
-      'timesPerWeekGoal',
-      'isArchived',
-      'uid',
-    ];
+    const {
+      name,
+      description,
+      timesPerWeekGoal,
+      isArchived,
+    } = this.state;
+    const { createActivity } = this.props;
 
-    const newActivity = (this.state, keysIWant);
-    newActivity.uid = authData.getUid();
-
-    activityData
-      .createActivity(newActivity)
-      .then((res) => {
-        this.props.history.push(`/activity/${res.data.name}`);
-      })
-      .catch((err) => console.error('fancy new activity fell apart', err));
-  };
+    const newActivity = {
+      name,
+      description,
+      timesPerWeekGoal,
+      isArchived,
+      uid: authData.getUid(),
+    };
+    createActivity(newActivity);
+    console.warn('here is a new activity please', newActivity);
+  }
 
   render() {
     const {
@@ -106,7 +105,7 @@ class NewActivity extends React.Component {
               onChange={this.changeIsArchievedEvent}
             />
           </div>
-          <button className="btn btn-dark" onClick={this.saveActvitiyEvent}><i className="fas fa-save fa-lg"></i></button>
+          <button className="btn btn-dark" onClick={this.saveActvitiy}><i className="fas fa-save fa-lg"></i></button>
           </form>
     );
   }

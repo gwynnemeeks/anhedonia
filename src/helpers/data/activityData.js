@@ -27,7 +27,7 @@ const getSingleActivity = (activityId) => axios.get(`${baseUrl}/activity/${activ
 
 const deleteActivity = (activityId) => axios.delete(`${baseUrl}/activity/${activityId}.json`);
 
-const createActivity = (newActvity) => axios.post(`${baseUrl}/activity.json`);
+const createActivity = (newActvity) => axios.post(`${baseUrl}/activity.json`, newActvity);
 
 export default {
   getActivitiesByUid,
