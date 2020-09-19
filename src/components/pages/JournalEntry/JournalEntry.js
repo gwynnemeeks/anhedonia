@@ -7,12 +7,19 @@ class JournalEntry extends React.Component {
     static propTypes = {
       entry: journalEntryShape.journalEntryShape,
       deleteJournalEntry: PropTypes.func.isRequired,
+      editAnEntry: PropTypes.func.isRequired,
     }
 
     deleteJournalEntryEvent = (e) => {
       e.preventDefault();
       const { journalEntry, deleteJournalEntry } = this.props;
       deleteJournalEntry(journalEntry.id);
+    }
+
+    editAnEntryEvent = (e) => {
+      e.preventDefault();
+      const { editAnEntry, entry } = this.props;
+      editAnEntry(entry);
     }
 
     render() {
@@ -24,6 +31,7 @@ class JournalEntry extends React.Component {
         <h5 className="card-title">{journalEntry.activityName}</h5>
         <p className="card-text">{journalEntry.entryText}</p>
         <p className="card-text"><small className="text-muted">{journalEntry.date}</small></p>
+        <button className="btn btn-warning" onClick={this.editAnEntryEvent}><i className="fas fa-pen-nib"></i></button>
         <button className="btn btn-danger" onClick={this.deleteJournalEntryEvent}><i className="far fa-trash-alt fa-lg"></i></button>
         </div>
         </div>
