@@ -1,14 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import authData from '../../../helpers/data/authData';
 
 class NewActivity extends React.Component {
+  static propTypes = {
+    createActivity: PropTypes.func.isRequired,
+    updateActivity: PropTypes.func.isRequired,
+    editAnActivity: PropTypes.object.isRequired,
+  }
+
   state = {
     name: '',
     description: '',
     timesPerWeekGoal: '',
     isArchived: false,
-    uid: authData.getUid(),
+    isEditing: false,
+  }
+
+  componentDidMount() {
+    const { editAnActivity } = this.props;
+    if (editAnActivity.name) {
+      this.setState({
+        name: editAnActivity.name,
+        description: editAnActivity.description,
+        timesPerWeekGoal: editAnActivity.timesPerWeekGoal,
+        isArchived: editAnActivity.isArchived,
+        isEditing: true,
+      });
+    }
   }
 
   changeNameEvent = (e) => {
@@ -52,12 +72,33 @@ class NewActivity extends React.Component {
     console.warn('here is a new activity please', newActivity);
   }
 
+  editedActvitiyEvent = (e) => {
+    e.preventDefault();
+    const {
+      name,
+      description,
+      timesPerWeekGoal,
+      isArchived,
+    } = this.state;
+    const { updateActivity, editAnActivity } = this.props;
+
+    const myActivityWithChanges = {
+      name,
+      description,
+      timesPerWeekGoal,
+      isArchived,
+      uid: authData.getUid(),
+    };
+    updateActivity(editAnActivity.id, myActivityWithChanges);
+  }
+
   render() {
     const {
       name,
       description,
       timesPerWeekGoal,
       isArchived,
+      isEditing,
     } = this.state;
 
     return (
@@ -105,7 +146,11 @@ class NewActivity extends React.Component {
               onChange={this.changeIsArchievedEvent}
             />
           </div>
-          <button className="btn btn-dark" onClick={this.saveActvitiy}><i className="fas fa-save fa-lg"></i></button>
+          {
+          isEditing
+            ? <button className="btn btn-dark" onClick={this.editedActvitiyEvent}><i className="fas fa-save fa-lg"></i></button>
+            : <button className="btn btn-dark" onClick={this.saveActvitiy}><i className="fas fa-save fa-lg"></i></button>
+  }
           </form>
     );
   }

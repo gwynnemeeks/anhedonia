@@ -29,9 +29,12 @@ const deleteActivity = (activityId) => axios.delete(`${baseUrl}/activity/${activ
 
 const createActivity = (newActvity) => axios.post(`${baseUrl}/activity.json`, newActvity);
 
+const updateActivity = (activityId, editedActivity) => axios.put(`${baseUrl}/activity/${activityId}.json`, editedActivity);
+
 export default {
   getActivitiesByUid,
   getSingleActivity,
   deleteActivity,
   createActivity,
+  updateActivity,
 };

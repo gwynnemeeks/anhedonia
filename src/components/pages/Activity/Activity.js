@@ -8,6 +8,7 @@ class ActivityCard extends React.Component {
       activity: activityShape.activityShape,
       setSingleActivity: PropTypes.func.isRequired,
       deleteActivity: PropTypes.func.isRequired,
+      editAnActivity: PropTypes.func.isRequired,
     }
 
     singleActivityEvent = (e) => {
@@ -22,6 +23,12 @@ class ActivityCard extends React.Component {
       deleteActivity(activity.id);
     }
 
+    editActivityEvent = (e) => {
+      e.preventDefault();
+      const { editAnActivity, activity } = this.props;
+      editAnActivity(activity);
+    }
+
     render() {
       const { activity } = this.props;
 
@@ -32,6 +39,7 @@ class ActivityCard extends React.Component {
           <p className="card-title">Times Per Week Goal: {activity.timesPerWeekGoal}</p>
           <p className="card-text">{activity.description}</p>
           <button className="btn btn-secondary" onClick={this.singleActivityEvent}><i className="fas fa-binoculars fa-lg"></i></button>
+          <button className="btn btn-warning" onClick={this.editActivityEvent}><i className="fas fa-pen-square fa-lg"></i></button>
           <button className="btn btn-danger" onClick={this.deleteActivityEvent}><i className="far fa-trash-alt fa-lg"></i></button>
           </div>
           </div>
