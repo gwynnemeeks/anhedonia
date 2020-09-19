@@ -5,6 +5,8 @@ import authData from '../../../helpers/data/authData';
 class NewJournalEntry extends React.Component {
   static propTypes = {
     createJournalEntry: PropTypes.func.isRequired,
+    updateJournalEntry: PropTypes.func.isRequired,
+    editedJournalEntry: PropTypes.object.isRequired,
   }
 
   state = {
@@ -15,6 +17,23 @@ class NewJournalEntry extends React.Component {
     moodColor: '',
     moodIcon: '',
     entryText: '',
+    isEditing: false,
+  }
+
+  componentDidMount() {
+    const { editedJournalEntry } = this.props;
+    if (editedJournalEntry.activityName) {
+      this.setState({
+        activityId: editedJournalEntry.activityId,
+        activityName: editedJournalEntry.activityName,
+        date: editedJournalEntry.date,
+        mood: editedJournalEntry.mood,
+        moodColor: editedJournalEntry.moodColor,
+        moodIcon: editedJournalEntry.moodColor,
+        entryText: editedJournalEntry.entryText,
+        isEditing: true,
+      });
+    }
   }
 
   changeActivityNameEvent = (e) => {
@@ -72,7 +91,43 @@ class NewJournalEntry extends React.Component {
     createJournalEntry(newJournalEntry);
   }
 
+  editJournalEntryEvent = (e) => {
+    e.preventDefault();
+    const {
+      activityId,
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+    } = this.state;
+    const { updateJournalEntry, editedJournalEntry } = this.props;
+
+    const entryWithChanges = {
+      activityId,
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+      uid: authData.getUid(),
+    };
+    updateJournalEntry(editedJournalEntry.id, entryWithChanges);
+  }
+
   render() {
+    const {
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+      isEditing,
+    } = this.state;
+
     return (
       <form className="col-6 offset-3">
       <div className="form-group">
@@ -82,6 +137,7 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="activityName"
       placeholder="Enter Activity Name"
+      value={activityName}
       onChange={this.changeActivityNameEvent}
     />
   </div>
@@ -92,16 +148,18 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="date"
       placeholder="Enter date in the following format: MM.DD.YYYY"
+      value={date}
       onChange={this.changeDateEvent}
     />
   </div>
   <div className="form-group">
-    <label htmlFor="Mood">Your Current Mood</label>
+    <label htmlFor="mood">Your Current Mood</label>
     <input
       type="text"
       className="form-control"
-      id="Mood"
+      id="mood"
       placeholder="Current Mood"
+      value={mood}
       onChange={this.changeMoodEvent}
     />
   </div>
@@ -112,6 +170,7 @@ class NewJournalEntry extends React.Component {
             className="form-control"
             id="moodIcon"
             placeholder="Enter Font Awesome Icon here and add fa-3x"
+            value={moodIcon}
             onChange={this.changeMoodIconEvent}
           />
         </div>
@@ -122,6 +181,7 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="moodColor"
       placeholder="Mood Color"
+      value={moodColor}
       onChange={this.changeMoodColorEvent}
     />
     <div className="form-group">
@@ -131,10 +191,15 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="entryText"
       placeholder="Journal Entry Text"
+      value={entryText}
       onChange={this.changeEntryTextEvent}
     />
   </div>
-  <button className="btn btn-dark" onClick={this.saveJournalEntryEvent}><i className="fas fa-save"></i></button>
+  {
+    isEditing
+      ? <button className="btn btn-light" onClick={this.editJournalEntryEvent}><i className="fas fa-pen-nib"></i></button>
+      : <button className="btn btn-dark" onClick={this.saveJournalEntryEvent}><i className="fas fa-save"></i></button>
+  }
 </div>
 </form>
     );
