@@ -7,7 +7,7 @@ class NewActivity extends React.Component {
   static propTypes = {
     createActivity: PropTypes.func.isRequired,
     updateActivity: PropTypes.func.isRequired,
-    editedActivity: PropTypes.object.isRequired,
+    editAnActivity: PropTypes.object.isRequired,
   }
 
   state = {
@@ -19,13 +19,13 @@ class NewActivity extends React.Component {
   }
 
   componentDidMount() {
-    const { editedActivity } = this.props;
-    if (editedActivity.name) {
+    const { editAnActivity } = this.props;
+    if (editAnActivity.name) {
       this.setState({
-        name: editedActivity.name,
-        description: editedActivity.description,
-        timesPerWeekGoal: editedActivity.timesPerWeekGoal,
-        isArchived: editedActivity.isArchived,
+        name: editAnActivity.name,
+        description: editAnActivity.description,
+        timesPerWeekGoal: editAnActivity.timesPerWeekGoal,
+        isArchived: editAnActivity.isArchived,
         isEditing: true,
       });
     }
@@ -80,7 +80,7 @@ class NewActivity extends React.Component {
       timesPerWeekGoal,
       isArchived,
     } = this.state;
-    const { updateActivity, editedActivity } = this.props;
+    const { updateActivity, editAnActivity } = this.props;
 
     const myActivityWithChanges = {
       name,
@@ -89,7 +89,7 @@ class NewActivity extends React.Component {
       isArchived,
       uid: authData.getUid(),
     };
-    updateActivity(editedActivity.id, myActivityWithChanges);
+    updateActivity(editAnActivity.id, myActivityWithChanges);
   }
 
   render() {

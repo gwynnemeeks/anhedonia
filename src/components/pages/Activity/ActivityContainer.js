@@ -48,14 +48,14 @@ class ActivityContainer extends React.Component {
     }
 
     editAnActivity = (activityToEdit) => {
-      this.setState({ isEditing: true, editActivity: activityToEdit });
+      this.setState({ formOpen: true, editActivity: activityToEdit });
     }
 
     updateActivity = (activityId, updatedActivity) => {
       activityData.updateActivity(activityId, updatedActivity)
         .then(() => {
           this.getActivity();
-          this.setState({ isEditing: false, editActivity: {} });
+          this.setState({ formOpen: false, editActivity: {} });
         })
         .catch((err) => console.error('update activity sucks', err));
     }
