@@ -12,9 +12,8 @@ class EditActivity extends React.Component {
   state = {
     name: '',
     description: '',
-    timesPerWeekGoal: '',
+    timesPerWeekGoal: number,
     isArchived: false,
-    uid: authData.getUid(),
     isEditing: false,
   }
 
@@ -26,7 +25,6 @@ class EditActivity extends React.Component {
         description: editedActivity.description,
         timesPerWeekGoal: editedActivity.timesPerWeekGoal,
         isArchived: editedActivity.isArchived,
-        uid: editedActivity.uid,
         isEditing: true,
       });
     }
