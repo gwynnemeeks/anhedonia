@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Activity from './Activity';
 import NewActivity from '../NewActivity/NewActivity';
-import EditActivity from '../EditActivity/EditActivity';
+// import EditActivity from '../EditActivity/EditActivity';
 
 import authData from '../../../helpers/data/authData';
 import activityData from '../../../helpers/data/activityData';
@@ -17,7 +17,6 @@ class ActivityContainer extends React.Component {
     state = {
       activities: [],
       formOpen: false,
-      isEditing: false,
       editActivity: {},
     }
 
@@ -65,7 +64,6 @@ class ActivityContainer extends React.Component {
       const {
         activities,
         formOpen,
-        isEditing,
         editActivity,
       } = this.state;
       const { setSingleActivity } = this.props;
@@ -76,8 +74,8 @@ class ActivityContainer extends React.Component {
       return (
   <div>
         <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square fa-lg"></i></button>
-      { formOpen ? <NewActivity createActivity={this.createActivity}/> : '' }
-      { isEditing ? <EditActivity editAnActivity={editActivity} updateActivity={this.updateActivity} /> : '' }
+      { formOpen ? <NewActivity createActivity={this.createActivity} editAnActivity={editActivity} updateActivity={this.updateActivity} /> : '' }
+
             <div className="card-columns">
                 {activityCard}
             </div>

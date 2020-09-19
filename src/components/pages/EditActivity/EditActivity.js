@@ -12,7 +12,7 @@ class EditActivity extends React.Component {
   state = {
     name: '',
     description: '',
-    timesPerWeekGoal: number,
+    timesPerWeekGoal: '',
     isArchived: false,
     isEditing: false,
   }
