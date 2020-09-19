@@ -17,6 +17,7 @@ class SingleActivity extends React.Component {
     activity: {},
     journalEntries: [],
     showForm: false,
+    editEntries: {},
   }
 
   getJournalEntries = () => {
@@ -53,17 +54,36 @@ class SingleActivity extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  editAnEntry = (entryToEdit) => {
+    this.setState({ showForm: true, editEntries: entryToEdit });
+  }
+
+  updateEntries = (journalEntryId, editedEntries) => {
+    journalData.updateJournalEntry(journalEntryId, editedEntries)
+      .then(() => {
+        this.getJournalEntries();
+        this.setState({ showForm: false, editEntries: {} });
+      })
+      .catch((err) => console.error('update entries borked', err));
+  }
+
   render() {
-    const { activity, journalEntries, showForm } = this.state;
+    const {
+      activity,
+      journalEntries,
+      showForm,
+      editEntries,
+    } = this.state;
     const { setSingleActivity, activityId } = this.props;
 
-    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry} deleteJournalEntry={this.deleteJournalEntry} />);
+    const journalCards = journalEntries.map((journalEntry) => <JournalEntry key={journalEntry.id} journalEntry={journalEntry}
+    deleteJournalEntry={this.deleteJournalEntry} editAnEntry={this.editAnEntry} />);
 
     return (
       <div>
         <button className="btn btn-warning" onClick={() => { this.setState({ showForm: !showForm }); }}>
                 <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i></button>
-          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} /> : ''}
+          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} editedJournalEntry={editEntries} updateEntries={this.updateEntries} /> : ''}
         <h1>{activity.name}</h1>
         <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
         <div className="card-columns">
