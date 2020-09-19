@@ -14,4 +14,11 @@ const deleteJournalEntry = (journalEntryId) => axios.delete(`${baseUrl}/journalE
 
 const createJournalEntry = (newJournalEntry) => axios.post(`${baseUrl}/journalEntry.json`, newJournalEntry);
 
-export default { getJournalEntryByActivityId, deleteJournalEntry, createJournalEntry };
+const updateJournalEntry = (journalEntryId, editedEntry) => axios.put(`${baseUrl}/journalEntry/${journalEntryId}.json`, editedEntry);
+
+export default {
+  getJournalEntryByActivityId,
+  deleteJournalEntry,
+  createJournalEntry,
+  updateJournalEntry,
+};
