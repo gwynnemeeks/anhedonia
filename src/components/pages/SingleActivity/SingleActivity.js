@@ -83,7 +83,7 @@ class SingleActivity extends React.Component {
       <div>
         <button className="btn btn-warning" onClick={() => { this.setState({ showForm: !showForm }); }}>
                 <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i></button>
-          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} editedJournalEntry={editEntries} updateJournalEntries={this.updateJournalEntries} /> : ''}
+          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} editedJournalEntry={editEntries} updateJournalEntry={this.updateJournalEntry} /> : ''}
         <h1>{activity.name}</h1>
         <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
         <div className="card-columns">

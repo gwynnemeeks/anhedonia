@@ -10,13 +10,13 @@ class NewJournalEntry extends React.Component {
   }
 
   state = {
-    activityId: '',
     activityName: '',
     date: '',
     mood: '',
     moodColor: '',
     moodIcon: '',
     entryText: '',
+    activityId: '',
     isEditing: false,
   }
 
@@ -24,13 +24,13 @@ class NewJournalEntry extends React.Component {
     const { editedJournalEntry } = this.props;
     if (editedJournalEntry.activityName) {
       this.setState({
-        activityId: editedJournalEntry.activityId,
         activityName: editedJournalEntry.activityName,
         date: editedJournalEntry.date,
         mood: editedJournalEntry.mood,
         moodColor: editedJournalEntry.moodColor,
         moodIcon: editedJournalEntry.moodColor,
         entryText: editedJournalEntry.entryText,
+        activityId: editedJournalEntry.activityId,
         isEditing: true,
       });
     }
@@ -94,24 +94,24 @@ class NewJournalEntry extends React.Component {
   editJournalEntryEvent = (e) => {
     e.preventDefault();
     const {
-      activityId,
       activityName,
       date,
       mood,
       moodIcon,
       moodColor,
       entryText,
+      activityId,
     } = this.state;
     const { updateJournalEntry, editedJournalEntry } = this.props;
 
     const entryWithChanges = {
-      activityId,
       activityName,
       date,
       mood,
       moodIcon,
       moodColor,
       entryText,
+      activityId,
       uid: authData.getUid(),
     };
     updateJournalEntry(editedJournalEntry.id, entryWithChanges);
