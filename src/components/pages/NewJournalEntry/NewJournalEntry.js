@@ -4,7 +4,10 @@ import authData from '../../../helpers/data/authData';
 
 class NewJournalEntry extends React.Component {
   static propTypes = {
+    activityId: PropTypes.string.isRequired,
     createJournalEntry: PropTypes.func.isRequired,
+    editingJournalEntryData: PropTypes.object.isRequired,
+    updateJournalEntry: PropTypes.func.isRequired,
   }
 
   state = {
@@ -15,6 +18,23 @@ class NewJournalEntry extends React.Component {
     moodColor: '',
     moodIcon: '',
     entryText: '',
+    isEditing: false,
+  }
+
+  componentDidMount() {
+    const { editingJournalEntryData } = this.props; // props are read only all about passing info
+    if (editingJournalEntryData.activityName) {
+      this.setState({ // point of state is current understanding to be modified
+        activityName: editingJournalEntryData.activityName,
+        date: editingJournalEntryData.date,
+        mood: editingJournalEntryData.mood,
+        moodColor: editingJournalEntryData.moodColor,
+        moodIcon: editingJournalEntryData.moodIcon,
+        entryText: editingJournalEntryData.entryText,
+        activityId: editingJournalEntryData.activityId,
+        isEditing: true,
+      });
+    }
   }
 
   changeActivityNameEvent = (e) => {
@@ -72,7 +92,43 @@ class NewJournalEntry extends React.Component {
     createJournalEntry(newJournalEntry);
   }
 
+  editJournalEntryEvent = (e) => {
+    e.preventDefault();
+    const {
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+      activityId,
+    } = this.state;
+    const { updateJournalEntry, editingJournalEntryData } = this.props;
+
+    const entryWithChanges = {
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+      activityId,
+      uid: authData.getUid(),
+    };
+    updateJournalEntry(editingJournalEntryData.id, entryWithChanges);
+  }
+
   render() {
+    const {
+      activityName,
+      date,
+      mood,
+      moodIcon,
+      moodColor,
+      entryText,
+      isEditing,
+    } = this.state;
+
     return (
       <form className="col-6 offset-3">
       <div className="form-group">
@@ -82,6 +138,7 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="activityName"
       placeholder="Enter Activity Name"
+      value={activityName}
       onChange={this.changeActivityNameEvent}
     />
   </div>
@@ -92,16 +149,18 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="date"
       placeholder="Enter date in the following format: MM.DD.YYYY"
+      value={date}
       onChange={this.changeDateEvent}
     />
   </div>
   <div className="form-group">
-    <label htmlFor="Mood">Your Current Mood</label>
+    <label htmlFor="mood">Your Current Mood</label>
     <input
       type="text"
       className="form-control"
-      id="Mood"
+      id="mood"
       placeholder="Current Mood"
+      value={mood}
       onChange={this.changeMoodEvent}
     />
   </div>
@@ -112,6 +171,7 @@ class NewJournalEntry extends React.Component {
             className="form-control"
             id="moodIcon"
             placeholder="Enter Font Awesome Icon here and add fa-3x"
+            value={moodIcon}
             onChange={this.changeMoodIconEvent}
           />
         </div>
@@ -122,6 +182,7 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="moodColor"
       placeholder="Mood Color"
+      value={moodColor}
       onChange={this.changeMoodColorEvent}
     />
     <div className="form-group">
@@ -131,10 +192,15 @@ class NewJournalEntry extends React.Component {
       className="form-control"
       id="entryText"
       placeholder="Journal Entry Text"
+      value={entryText}
       onChange={this.changeEntryTextEvent}
     />
   </div>
-  <button className="btn btn-dark" onClick={this.saveJournalEntryEvent}><i className="fas fa-save"></i></button>
+  {
+    isEditing
+      ? <button className="btn btn-light" onClick={this.editJournalEntryEvent}><i className="fas fa-pen-nib"></i></button>
+      : <button className="btn btn-dark" onClick={this.saveJournalEntryEvent}><i className="fas fa-save"></i></button>
+  }
 </div>
 </form>
     );

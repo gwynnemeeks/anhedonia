@@ -42,8 +42,10 @@ class NewActivity extends React.Component {
   }
 
   changeTimesPerWeekGoalEvent = (e) => {
-    e.preventDefault();
-    this.setState({ timesPerWeekGoal: e.target.value });
+    e.preventDefault(); // turn string into an interger
+    // const parsed = parseInt(x, base);
+    // const timesPerWeekGoal = parseInt(e.target.value, 10);
+    this.setState({ timesPerWeekGoal: parseInt(e.target.value, 10) });
   }
 
   changeIsArchievedEvent = (e) => {
