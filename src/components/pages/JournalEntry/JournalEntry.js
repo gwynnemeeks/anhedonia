@@ -31,7 +31,7 @@ class JournalEntry extends React.Component {
         <h5 className="card-title">{journalEntry.activityName}</h5>
         <p className="card-text">{journalEntry.entryText}</p>
         <p className="card-text"><small className="text-muted">{journalEntry.date}</small></p>
-        <button className="btn btn-warning" onClick={this.editJournalEntryEvent}><i className="fas fa-pen-nib"></i></button>
+        <button className="btn btn-warning" onClick={this.editJournalEntryEvent}><i className="fas fa-pen-nib fa-lg"></i></button>
         <button className="btn btn-danger" onClick={this.deleteJournalEntryEvent}><i className="far fa-trash-alt fa-lg"></i></button>
         </div>
         </div>
