@@ -39,7 +39,7 @@ class ActivityCard extends React.Component {
           <p className="card-title">Times Per Week Goal: {activity.timesPerWeekGoal}</p>
           <p className="card-text">{activity.description}</p>
           <button className="btn btn-secondary" onClick={this.singleActivityEvent}><i className="fas fa-binoculars fa-lg"></i></button>
-          <button className="btn btn-warning" onClick={this.editActivityEvent}><i className="fas fa-pen-square fa-lg"></i></button>
+          <button className="btn btn-warning" onClick={this.editActivityEvent}><i className="fas fa-pen-nib fa-lg"></i></button>
           <button className="btn btn-danger" onClick={this.deleteActivityEvent}><i className="far fa-trash-alt fa-lg"></i></button>
           </div>
           </div>

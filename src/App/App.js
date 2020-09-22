@@ -11,6 +11,7 @@ import MyNavbar from '../components/pages/MyNavBar/MyNavBar';
 // import NewJournalEntry from '../components/pages/NewJournalEntry/NewJournalEntry';
 import SingleActivity from '../components/pages/SingleActivity/SingleActivity';
 import ActivityContainer from '../components/pages/Activity/ActivityContainer';
+import WelcomePage from '../components/pages/Welcome/WelcomePage';
 
 import fbConnection from '../helpers/data/connection';
 
@@ -53,7 +54,7 @@ class App extends React.Component {
       if (authed && singleActivityId.length > 0) {
         return <SingleActivity activityId={singleActivityId} setSingleActivity={this.setSingleActivity} />;
       }
-      return '';
+      return <WelcomePage />;
     };
 
     return (
