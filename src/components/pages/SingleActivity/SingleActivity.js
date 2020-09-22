@@ -54,11 +54,11 @@ class SingleActivity extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  editAnEntry = (entryToEdit) => {
-    this.setState({ showForm: true, editEntries: entryToEdit });
+  editAnEntry = (journalEntry) => {
+    this.setState({ showForm: true, editEntries: journalEntry });
   }
 
-  updateJournalEntries = (journalEntryId, editedEntries) => {
+  updateJournalEntry = (journalEntryId, editedEntries) => {
     journalData.updateJournalEntry(journalEntryId, editedEntries)
       .then(() => {
         this.getJournalEntries();
@@ -83,7 +83,8 @@ class SingleActivity extends React.Component {
       <div>
         <button className="btn btn-warning" onClick={() => { this.setState({ showForm: !showForm }); }}>
                 <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i></button>
-          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry} editedJournalEntry={editEntries} updateJournalEntry={this.updateJournalEntry} /> : ''}
+          {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry}
+          editingJournalEntryData={editEntries} updateJournalEntry={this.updateJournalEntry} /> : ''}
         <h1>{activity.name}</h1>
         <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
         <div className="card-columns">

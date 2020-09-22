@@ -4,33 +4,34 @@ import authData from '../../../helpers/data/authData';
 
 class NewJournalEntry extends React.Component {
   static propTypes = {
+    activityId: PropTypes.string.isRequired,
     createJournalEntry: PropTypes.func.isRequired,
+    editingJournalEntryData: PropTypes.object.isRequired,
     updateJournalEntry: PropTypes.func.isRequired,
-    editedJournalEntry: PropTypes.object.isRequired,
   }
 
   state = {
+    activityId: '',
     activityName: '',
     date: '',
     mood: '',
     moodColor: '',
     moodIcon: '',
     entryText: '',
-    activityId: '',
     isEditing: false,
   }
 
   componentDidMount() {
-    const { editedJournalEntry } = this.props;
-    if (editedJournalEntry.activityName) {
-      this.setState({
-        activityName: editedJournalEntry.activityName,
-        date: editedJournalEntry.date,
-        mood: editedJournalEntry.mood,
-        moodColor: editedJournalEntry.moodColor,
-        moodIcon: editedJournalEntry.moodColor,
-        entryText: editedJournalEntry.entryText,
-        activityId: editedJournalEntry.activityId,
+    const { editingJournalEntryData } = this.props; // props are read only all about passing info
+    if (editingJournalEntryData.activityName) {
+      this.setState({ // point of state is current understanding to be modified
+        activityName: editingJournalEntryData.activityName,
+        date: editingJournalEntryData.date,
+        mood: editingJournalEntryData.mood,
+        moodColor: editingJournalEntryData.moodColor,
+        moodIcon: editingJournalEntryData.moodIcon,
+        entryText: editingJournalEntryData.entryText,
+        activityId: editingJournalEntryData.activityId,
         isEditing: true,
       });
     }
@@ -102,7 +103,7 @@ class NewJournalEntry extends React.Component {
       entryText,
       activityId,
     } = this.state;
-    const { updateJournalEntry, editedJournalEntry } = this.props;
+    const { updateJournalEntry, editingJournalEntryData } = this.props;
 
     const entryWithChanges = {
       activityName,
@@ -114,7 +115,7 @@ class NewJournalEntry extends React.Component {
       activityId,
       uid: authData.getUid(),
     };
-    updateJournalEntry(editedJournalEntry.id, entryWithChanges);
+    updateJournalEntry(editingJournalEntryData.id, entryWithChanges);
   }
 
   render() {
