@@ -99,7 +99,7 @@ class NewActivity extends React.Component {
       name,
       description,
       timesPerWeekGoal,
-      isArchived,
+      // isArchived,
       isEditing,
     } = this.state;
 
@@ -138,7 +138,7 @@ class NewActivity extends React.Component {
           onChange={this.changeTimesPerWeekGoalEvent}
           />
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
             <label htmlFor="isArchived">Archive Activity</label>
             <input
               type="checkbox"
@@ -147,7 +147,7 @@ class NewActivity extends React.Component {
               checked={isArchived}
               onChange={this.changeIsArchievedEvent}
             />
-          </div>
+          </div> */}
           {
           isEditing
             ? <button className="btn btn-dark" onClick={this.editedActvitiyEvent}><i className="fas fa-save fa-lg"></i></button>

@@ -123,8 +123,8 @@ class NewJournalEntry extends React.Component {
       activityName,
       date,
       mood,
-      moodIcon,
-      moodColor,
+      // moodIcon,
+      // moodColor,
       entryText,
       isEditing,
     } = this.state;
@@ -164,7 +164,7 @@ class NewJournalEntry extends React.Component {
       onChange={this.changeMoodEvent}
     />
   </div>
-  <div className="form-group">
+  {/* <div className="form-group">
             <label htmlFor="moodIcon">Mood Icon</label>
             <input
             type="text"
@@ -185,6 +185,7 @@ class NewJournalEntry extends React.Component {
       value={moodColor}
       onChange={this.changeMoodColorEvent}
     />
+    </div> */}
     <div className="form-group">
     <label htmlFor="entryText">Entry Text</label>
     <input
@@ -201,7 +202,6 @@ class NewJournalEntry extends React.Component {
       ? <button className="btn btn-light" onClick={this.editJournalEntryEvent}><i className="fas fa-pen-nib"></i></button>
       : <button className="btn btn-dark" onClick={this.saveJournalEntryEvent}><i className="fas fa-save"></i></button>
   }
-</div>
 </form>
     );
   }
