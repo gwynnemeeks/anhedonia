@@ -73,7 +73,7 @@ class ActivityContainer extends React.Component {
 
       return (
   <div>
-        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square fa-lg"></i></button>
+        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square fa-lg"></i> New Activity</button>
       { formOpen ? <NewActivity createActivity={this.createActivity} editAnActivity={editActivity} updateActivity={this.updateActivity} /> : '' }
 
             <div className="card-columns">

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import activityShape from '../../../helpers/propz/activityShape';
 
+import './Activity.scss';
+
 class ActivityCard extends React.Component {
     static propTypes = {
       activity: activityShape.activityShape,
