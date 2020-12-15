@@ -7,6 +7,8 @@ import NewJournalEntry from '../NewJournalEntry/NewJournalEntry';
 import activityData from '../../../helpers/data/activityData';
 import journalData from '../../../helpers/data/journalData';
 
+import './SingleActivity.scss';
+
 class SingleActivity extends React.Component {
   static propTypes = {
     activityId: PropTypes.string.isRequired,
@@ -81,12 +83,13 @@ class SingleActivity extends React.Component {
 
     return (
       <div>
+        <h1>{activity.name}</h1>
         <button className="btn btn-warning" onClick={() => { this.setState({ showForm: !showForm }); }}>
-                <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i></button>
+                <i className={showForm ? 'far fa-times-circle fa-lg' : 'far fa-plus-square fa-lg'}></i>  New Journal Entry</button>
           {showForm ? <NewJournalEntry activityId={activityId} createJournalEntry={this.createJournalEntry}
           editingJournalEntryData={editEntries} updateJournalEntry={this.updateJournalEntry} /> : ''}
-        <h1>{activity.name}</h1>
-        <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i></button>
+
+        <button className="btn btn-danger" onClick={() => { setSingleActivity(''); }}><i className="fas fa-undo-alt fa-lg"></i>  Return to Activities</button>
         <div className="card-columns">
           {journalCards}
         </div>
