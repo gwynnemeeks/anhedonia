@@ -104,7 +104,7 @@ class NewActivity extends React.Component {
     } = this.state;
 
     return (
-      <form className="col 6 offset-3">
+      <form className="col-6 offset-3">
       <div className="form-group">
           <label htmlFor="name">Activity Name</label>
           <input
